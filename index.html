@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#fff5e8">
+<meta name="description" content="Mon Petit Monde : livre éducatif interactif pour les enfants de 4 à 6 ans.">
+<link rel="manifest" href="manifest.json">
+<title>Mon Petit Monde — Livre éducatif</title>
+<style>
+:root{--ink:#26324b;--muted:#68738a;--paper:#fffdf8;--cream:#fff5e8;--blue:#4d83e6;--pink:#ff8fa3;--yellow:#ffd66b;--green:#68c69b;--purple:#a88be8;--line:#f0e7d9;--shadow:0 10px 28px #33415c14}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer;border:0}.app{max-width:1100px;margin:auto;min-height:100vh;background:var(--paper);box-shadow:0 0 40px #26324b0b}
+header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid var(--line);position:sticky;top:0;background:#fffdf8ee;backdrop-filter:blur(10px);z-index:5}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px}.logo{width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,var(--yellow),var(--pink));display:grid;place-items:center;font-size:24px}.top-actions{display:flex;gap:8px}.pill{padding:9px 13px;border-radius:99px;background:#f3f5fa;color:var(--ink);font-weight:750}
+main{padding:20px}.hero{background:linear-gradient(120deg,#fff0c7,#ffe5e8 55%,#e8efff);border-radius:25px;padding:24px;display:grid;grid-template-columns:1.4fr .8fr;gap:15px;align-items:center}.hero h1{font-size:clamp(27px,5vw,43px);line-height:1.05;margin:5px 0 10px}.hero p{color:#58637a;max-width:560px;line-height:1.55}.mascot{font-size:clamp(75px,14vw,135px);text-align:center;filter:drop-shadow(0 10px 8px #00000012)}.primary{background:var(--blue);color:white;padding:12px 18px;border-radius:14px;font-weight:850;box-shadow:0 5px 0 #3265c0}.secondary{background:white;color:var(--ink);padding:11px 15px;border-radius:13px;font-weight:800;border:1px solid var(--line)}.section-title{display:flex;justify-content:space-between;align-items:end;margin:25px 2px 12px}.section-title h2{margin:0;font-size:22px}.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.tile{background:white;border:1px solid var(--line);border-radius:19px;padding:16px;text-align:left;box-shadow:var(--shadow);min-height:140px;transition:.15s}.tile:active{transform:scale(.98)}.tile .emoji{font-size:37px}.tile h3{margin:7px 0 3px;font-size:17px}.tile p{margin:0;color:var(--muted);font-size:13px}.tile.locked{background:#faf8f4;position:relative}.lock{font-size:11px;color:#8a6b2c;font-weight:900}
+.reader{display:none}.reader.active{display:block}.home.hidden{display:none}.reader-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}.book-page{background:#fff;border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:clamp(18px,4vw,35px);min-height:360px}.page-kicker{font-size:12px;text-transform:uppercase;letter-spacing:1.5px;color:#8791a5;font-weight:900}.page-title{font-size:clamp(25px,5vw,38px);margin:8px 0}.page-text{font-size:18px;line-height:1.6;color:#566178}.art{font-size:clamp(85px,18vw,155px);text-align:center;padding:12px}.choices{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px}.choice{background:#f5f7fc;border:2px solid transparent;border-radius:16px;padding:15px;font-weight:850;font-size:18px}.choice.correct{border-color:var(--green);background:#eafff3}.choice.wrong{border-color:var(--pink);background:#fff0f2}.feedback{min-height:30px;font-weight:850;margin-top:12px}.pager{display:flex;justify-content:space-between;gap:10px;margin-top:14px}.progress{height:8px;background:#edf0f6;border-radius:9px;overflow:hidden;margin:10px 0 18px}.progress span{display:block;height:100%;background:var(--green);width:0;transition:.3s}
+.coloring-wrap{display:grid;grid-template-columns:1fr;gap:12px}.canvas-box{background:#fff;border:2px dashed #dfe5ef;border-radius:18px;overflow:hidden;touch-action:none}.canvas-box canvas{display:block;width:100%;height:auto;touch-action:none}.palette{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.color-dot{width:34px;height:34px;border-radius:50%;border:3px solid white;box-shadow:0 0 0 1px #ccd2df}.color-dot.selected{box-shadow:0 0 0 3px var(--ink)}.toolrow{display:flex;gap:8px;flex-wrap:wrap}.toolrow button{padding:10px 13px;border-radius:12px;background:#f1f4fa;font-weight:800}
+footer{text-align:center;padding:24px;color:#929bad;font-size:12px}.modal{position:fixed;inset:0;background:#17203399;display:none;place-items:center;padding:18px;z-index:20}.modal.show{display:grid}.modal-card{background:white;border-radius:22px;padding:24px;max-width:430px;width:100%;box-shadow:0 20px 60px #0003}.modal-card h2{margin-top:0}.modal-card input{width:100%;padding:13px;border:1px solid #dce2ed;border-radius:12px;margin:8px 0 12px}.modal-actions{display:flex;gap:8px;flex-wrap:wrap}.note{font-size:12px;line-height:1.5;color:#788195}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#26324b;color:white;padding:12px 17px;border-radius:99px;display:none;z-index:30;font-weight:800}
+@media(max-width:650px){main{padding:14px}.hero{grid-template-columns:1fr}.mascot{display:none}.grid{grid-template-columns:repeat(2,1fr)}.tile{min-height:130px;padding:13px}.choices{grid-template-columns:1fr 1fr}.book-page{min-height:320px}}
+@media(max-width:390px){.grid{grid-template-columns:1fr 1fr}.brand{font-size:15px}.top-actions .pill{padding:8px;font-size:12px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brand"><div class="logo">🌈</div><span>MON PETIT MONDE</span></div>
+ <div class="top-actions"><button class="pill" id="homeBtn">🏠 Accueil</button><button class="pill" id="parentBtn">👨‍👩‍👧 Parents</button></div>
+</header>
+<main>
+<section class="home" id="home">
+ <div class="hero">
+  <div><div class="page-kicker">Mon livre pour apprendre en s'amusant</div><h1>Je découvre<br>le monde !</h1><p>Des histoires, des couleurs, des lettres et des petits défis pour apprendre à son rythme, de 4 à 6 ans.</p><button class="primary" id="startBtn">Commencer à apprendre →</button></div>
+  <div class="mascot" aria-hidden="true">🦁</div>
+ </div>
+ <div class="section-title"><div><h2>Choisis ton activité</h2><div class="muted">Touche une grande image pour commencer.</div></div><div class="muted" id="stars">⭐ 0 étoile</div></div>
+ <div class="grid" id="activityGrid">
+  <button class="tile" data-activity="story"><div class="emoji">📖</div><h3>Mes histoires</h3><p>Écouter et comprendre</p></button>
+  <button class="tile" data-activity="letters"><div class="emoji">🔤</div><h3>Les lettres</h3><p>Découvrir l'alphabet</p></button>
+  <button class="tile" data-activity="numbers"><div class="emoji">🔢</div><h3>Les nombres</h3><p>Compter et comparer</p></button>
+  <button class="tile" data-activity="color"><div class="emoji">🎨</div><h3>Mon coloriage</h3><p>Créer avec les couleurs</p></button>
+  <button class="tile" data-activity="shapes"><div class="emoji">🧩</div><h3>Formes et logique</h3><p>Observer et associer</p></button>
+  <button class="tile locked" data-activity="discovery"><div class="emoji">🌍</div><h3>Je découvre l'Afrique</h3><p>Animaux et nature</p><span class="lock">🔒 VERSION COMPLÈTE</span></button>
+ </div>
+</section>
+<section class="reader" id="reader">
+ <div class="reader-head"><button class="secondary" id="backBtn">← Retour</button><div class="muted" id="activityLabel">Activité</div><button class="secondary" id="speakBtn">🔊 Écouter</button></div>
+ <div class="progress"><span id="progressBar"></span></div>
+ <div id="pageHost"></div>
+ <div class="pager"><button class="secondary" id="prevBtn">← Précédent</button><button class="primary" id="nextBtn">Suivant →</button></div>
+</section>
+</main>
+<footer>MON PETIT MONDE • Apprendre, jouer et grandir 🌟<br>Version 1.0 — contenu éducatif ludique pour les 4 à 6 ans.</footer>
+</div>
+<div class="modal" id="parentModal"><div class="modal-card">
+ <h2>🔐 Espace des parents</h2><p>Débloquez la version complète de Mon Petit Monde.</p>
+ <p><b>Accès premium :</b> entrez le mot de passe fourni après confirmation du paiement.</p>
+ <input id="passInput" type="password" inputmode="numeric" placeholder="Mot de passe">
+ <div class="modal-actions"><button class="primary" id="unlockBtn">Débloquer</button><button class="secondary" id="closeModal">Fermer</button></div>
+ <hr style="border:0;border-top:1px solid #eee;margin:18px 0">
+ <p><b>Pour payer ou demander l'accès :</b></p>
+ <a id="payLink" class="primary" style="display:inline-block;text-decoration:none" target="_blank" rel="noopener">💬 Contacter sur WhatsApp</a>
+ <p class="note">Important : le mot de passe intégré à cette version est une protection simple, pas un système de paiement sécurisé. Pour une vraie commercialisation, il faudra valider les paiements côté serveur.</p>
+</div></div>
+<div class="toast" id="toast"></div>
+<script>
+const $=s=>document.querySelector(s);
+const phone="237683674166";
+$("#payLink").href="https://wa.me/"+phone+"?text="+encodeURIComponent("Bonjour, je souhaite acheter la version complète de Mon Petit Monde. Comment effectuer le paiement et recevoir mon accès ?");
+const premiumPassword="2080"; // Démonstration : mot de passe visible dans le code source.
+let premium=localStorage.getItem("mpm_premium")==="yes";
+let current="story", pageIndex=0, stars=Number(localStorage.getItem("mpm_stars")||0);
+const activities={
+ story:{label:"Mes histoires",pages:[
+  {kind:"story",tag:"Petite histoire",title:"Lina et le petit oiseau",text:"Un matin, Lina entend un petit « cui-cui » dans le jardin. Elle voit un oiseau qui cherche de l'eau. Lina pose un petit bol d'eau à l'ombre. L'oiseau boit et chante joyeusement.",art:"👧🏽 🐦 🌳",question:"Que donne Lina au petit oiseau ?",choices:["Un bol d'eau","Un ballon","Un gâteau"],answer:0,explain:"Bravo ! Lina donne de l'eau à l'oiseau."},
+  {kind:"story",tag:"Je comprends",title:"Un geste gentil",text:"Lina prend soin de l'oiseau sans lui faire peur. Les animaux ont besoin d'eau, de nourriture adaptée et de respect.",art:"💧 🐦 ❤️",question:"Comment faut-il traiter les animaux ?",choices:["Les respecter","Les effrayer","Les jeter"],answer:0,explain:"Oui ! Nous devons respecter les animaux."}
+ ]},
+ letters:{label:"Les lettres",pages:[
+  {kind:"learn",tag:"Alphabet",title:"La lettre A",text:"A comme ANANAS. Écoute le son : Aaaaa. Regarde la lettre et répète doucement.",art:"🅰️ 🍍",question:"Quel mot commence par A ?",choices:["Ananas","Banane","Maison"],answer:0,explain:"A comme Ananas !"},
+  {kind:"learn",tag:"Alphabet",title:"La lettre B",text:"B comme BANANE. La lettre B fait le son « beu ». Répète : B, B, Banane !",art:"🅱️ 🍌",question:"Quel mot commence par B ?",choices:["Soleil","Banane","École"],answer:1,explain:"Bravo ! B comme Banane."},
+  {kind:"learn",tag:"Alphabet",title:"La lettre C",text:"C comme CAMION. Observe la lettre C et prononce son nom.",art:"🌙 🚚",question:"Quel mot commence par C ?",choices:["Camion","Poisson","Orange"],answer:0,explain:"C comme Camion !"}
+ ]},
+ numbers:{label:"Les nombres",pages:[
+  {kind:"quiz",tag:"Je compte",title:"Compte les mangues",text:"Regarde bien les mangues. Compte-les une par une.",art:"🥭 🥭 🥭",question:"Combien vois-tu de mangues ?",choices:["2","3","4"],answer:1,explain:"Il y a 3 mangues. Un, deux, trois !"},
+  {kind:"quiz",tag:"Je compte",title:"Les cinq étoiles",text:"Comptons ensemble les étoiles.",art:"⭐ ⭐ ⭐ ⭐ ⭐",question:"Combien y a-t-il d'étoiles ?",choices:["4","5","6"],answer:1,explain:"Exact ! Il y a 5 étoiles."},
+  {kind:"quiz",tag:"Je compare",title:"Le plus grand nombre",text:"Trois est plus grand que deux. Choisis le nombre le plus grand.",art:"2️⃣     3️⃣",question:"Quel nombre est le plus grand ?",choices:["2","3"],answer:1,explain:"Oui, 3 est plus grand que 2."}
+ ]},
+ shapes:{label:"Formes et logique",pages:[
+  {kind:"quiz",tag:"Les formes",title:"Trouve le cercle",text:"Un cercle est rond comme une roue ou une balle.",art:"🔴 🔺 🟦",question:"Quelle forme est ronde ?",choices:["Le cercle","Le triangle","Le carré"],answer:0,explain:"Bravo ! Le cercle est rond."},
+  {kind:"quiz",tag:"Observer",title:"Les animaux",text:"Lequel de ces animaux a de longues oreilles ?",art:"🐘 🐰 🦒",question:"Qui a de longues oreilles ?",choices:["L'éléphant","Le lapin","La girafe"],answer:1,explain:"Oui ! Le lapin a de longues oreilles."}
+ ]},
+ discovery:{label:"Je découvre l'Afrique",pages:[
+  {kind:"quiz",tag:"Afrique",title:"Le roi de la savane",text:"Le lion vit dans certaines régions d'Afrique. Il est un grand félin.",art:"🦁 🌾",question:"Quel animal rugit ?",choices:["Le lion","La poule","Le papillon"],answer:0,explain:"Le lion rugit. Bravo !"}
+ ]}
+};
+function updateStars(){ $("#stars").textContent="⭐ "+stars+" étoile"+(stars>1?"s":"");localStorage.setItem("mpm_stars",stars); }
+function toast(t){const el=$("#toast");el.textContent=t;el.style.display="block";setTimeout(()=>el.style.display="none",2200)}
+function openActivity(id){if(id==="discovery"&&!premium){$("#parentModal").classList.add("show");return}
+ current=id;pageIndex=0;$("#home").classList.add("hidden");$("#reader").classList.add("active");renderPage();}
+function renderPage(){
+ const a=activities[current],p=a.pages[pageIndex];$("#activityLabel").textContent=a.label;$("#progressBar").style.width=((pageIndex+1)/a.pages.length*100)+"%";
+ let choices=(p.choices||[]).map((c,i)=>`<button class="choice" data-choice="${i}">${c}</button>`).join("");
+ $("#pageHost").innerHTML=`<article class="book-page"><div class="page-kicker">${p.tag} • Page ${pageIndex+1}/${a.pages.length}</div><h1 class="page-title">${p.title}</h1><p class="page-text">${p.text}</p><div class="art" role="img" aria-label="Illustration">${p.art}</div><h3>${p.question}</h3><div class="choices">${choices}</div><div class="feedback" id="feedback" aria-live="polite"></div></article>`;
+ document.querySelectorAll("[data-choice]").forEach(b=>b.addEventListener("click",()=>answer(Number(b.dataset.choice))));
+ $("#prevBtn").disabled=pageIndex===0;$("#nextBtn").textContent=pageIndex===a.pages.length-1?"Terminer ✓":"Suivant →";
+}
+function answer(n){const p=activities[current].pages[pageIndex],fb=$("#feedback");document.querySelectorAll(".choice").forEach((b,i)=>{b.disabled=true;if(i===p.answer)b.classList.add("correct");if(i===n&&n!==p.answer)b.classList.add("wrong")});
+ if(n===p.answer){fb.textContent="🌟 "+p.explain;stars++;updateStars();}else fb.textContent="💛 "+p.explain+" Essaie encore à la prochaine page.";
+}
+function say(){const p=activities[current].pages[pageIndex];if(!("speechSynthesis"in window)){toast("La lecture vocale n'est pas disponible sur ce navigateur.");return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(p.title+". "+p.text+" "+p.question);u.lang="fr-FR";u.rate=.88;speechSynthesis.speak(u)}
+function back(){speechSynthesis?.cancel?.();$("#reader").classList.remove("active");$("#home").classList.remove("hidden")}
+document.querySelectorAll("[data-activity]").forEach(b=>b.addEventListener("click",()=>openActivity(b.dataset.activity)));
+$("#startBtn").onclick=()=>openActivity("story");$("#backBtn").onclick=back;$("#homeBtn").onclick=back;$("#speakBtn").onclick=say;
+$("#prevBtn").onclick=()=>{if(pageIndex>0){pageIndex--;renderPage()}};
+$("#nextBtn").onclick=()=>{if(pageIndex<activities[current].pages.length-1){pageIndex++;renderPage()}else{toast("Bravo ! Tu as terminé cette activité. ⭐");back()}};
+$("#parentBtn").onclick=()=>$("#parentModal").classList.add("show");$("#closeModal").onclick=()=>$("#parentModal").classList.remove("show");
+$("#unlockBtn").onclick=()=>{if($("#passInput").value===premiumPassword){premium=true;localStorage.setItem("mpm_premium","yes");$("#parentModal").classList.remove("show");$("#passInput").value="";toast("Version complète débloquée !");document.querySelector('[data-activity="discovery"]').classList.remove("locked")}else toast("Mot de passe incorrect.")};
+if(premium)document.querySelector('[data-activity="discovery"]').classList.remove("locked");
+updateStars();
+
+// Atelier de coloriage : dessin libre au doigt/souris, palette et gomme.
+document.querySelector('[data-activity="color"]').onclick=()=>openColoring();
+function openColoring(){
+ current="color";$("#home").classList.add("hidden");$("#reader").classList.add("active");$("#activityLabel").textContent="Mon coloriage";$("#progressBar").style.width="100%";
+ $("#pageHost").innerHTML=`<article class="book-page"><div class="page-kicker">Atelier créatif</div><h1 class="page-title">Colorie le papillon !</h1><p class="page-text">Choisis une couleur puis dessine avec ton doigt dans le cadre.</p><div class="coloring-wrap"><div class="palette" id="palette"></div><div class="canvas-box"><canvas id="paint" width="700" height="430"></canvas></div><div class="toolrow"><button id="eraser">Gomme</button><button id="clear">Effacer</button><button id="save">Enregistrer l'image</button></div></div></article>`;
+ $("#prevBtn").style.visibility="hidden";$("#nextBtn").style.visibility="hidden";
+ const colors=["#f44336","#ff9800","#ffeb3b","#4caf50","#03a9f4","#3f51b5","#9c27b0","#ff80ab","#795548","#222222","#ffffff"];
+ let chosen=colors[0],drawing=false,canvas=$("#paint"),ctx=canvas.getContext("2d");
+ colors.forEach((c,i)=>{let d=document.createElement("button");d.className="color-dot"+(i===0?" selected":"");d.style.background=c;d.setAttribute("aria-label","Couleur "+c);d.onclick=()=>{chosen=c;document.querySelectorAll(".color-dot").forEach(x=>x.classList.remove("selected"));d.classList.add("selected")};$("#palette").append(d)});
+ function outline(){ctx.clearRect(0,0,700,430);ctx.fillStyle="#fff";ctx.fillRect(0,0,700,430);ctx.strokeStyle="#26324b";ctx.lineWidth=8;ctx.lineCap="round";
+ // Papillon simple, grand contour noir adapté au coloriage
+ ctx.beginPath();ctx.moveTo(350,205);ctx.ellipse(245,145,105,95,-.4,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.ellipse(455,145,105,95,.4,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.ellipse(260,300,75,65,.5,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.ellipse(440,300,75,65,-.5,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.roundRect(330,120,40,210,20);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(340,125);ctx.quadraticCurveTo(280,40,250,65);ctx.moveTo(360,125);ctx.quadraticCurveTo(420,40,450,65);ctx.stroke();
+ }
+ outline();
+ function pos(e){let r=canvas.getBoundingClientRect();return{x:(e.clientX-r.left)*canvas.width/r.width,y:(e.clientY-r.top)*canvas.height/r.height}}
+ canvas.onpointerdown=e=>{drawing=true;canvas.setPointerCapture(e.pointerId);let p=pos(e);ctx.beginPath();ctx.moveTo(p.x,p.y)};
+ canvas.onpointermove=e=>{if(!drawing)return;let p=pos(e);ctx.strokeStyle=chosen;ctx.lineWidth=22;ctx.lineCap="round";ctx.lineTo(p.x,p.y);ctx.stroke()};
+ canvas.onpointerup=()=>drawing=false;canvas.onpointercancel=()=>drawing=false;
+ $("#eraser").onclick=()=>{chosen="#ffffff";toast("Gomme sélectionnée")};
+ $("#clear").onclick=()=>{outline();toast("Dessin effacé")};
+ $("#save").onclick=()=>{let a=document.createElement("a");a.download="mon-coloriage.png";a.href=canvas.toDataURL("image/png");a.click()};
+}
+if("serviceWorker"in navigator && location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
+</script>
+</body>
+</html>
